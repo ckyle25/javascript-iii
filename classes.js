@@ -21,7 +21,17 @@ Each employee can:
 
 call your class Employee and receive all the data in the constructor in the order listed
 */
-
+class Employee{
+  constructor(first_name,last_name,email,age){
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  }
+  makeWidget(){
+    return this.first_name + ' ' + this.last_name + ' Widget';
+  }
+}
 
 
 /*
@@ -40,7 +50,24 @@ They can (methods) :
 call your class Manager
 
 */
-
+class Manager{
+  constructor(first_name,last_name,email,age,reports){
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = []
+  }
+  makeWidget(){
+    return this.first_name + ' ' + this.last_name + ' Widget';
+  }
+  hire(name){
+    this.reports.push(name);
+  }
+  fire(name){
+    this.reports.splice(this.reports.indexOf(name),1);
+  }
+}
 
 
 
@@ -64,7 +91,69 @@ Everytime they fire an employee they get a bonus of $100 add to their .
 
 call you class ProgressiveManager
 */
-
+class ProgressiveManager{
+  constructor(first_name,last_name,email,age){
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+    this.title = 'Not a manager';
+    this.bonus = 0;
+  }
+  makeWidget(){
+    return this.first_name + ' ' + this.last_name + ' Widget';
+  }
+  hire(name){
+    this.reports.push(name);
+    var numReps = this.reports.length
+    switch(true){
+      case (numReps <= 0):
+        this.title = 'Not a manager';
+        break;
+      case (numReps > 0 && numReps <= 3):
+        this.title = 'Barely Manager';
+        break;
+      case (numReps >= 4 && numReps <= 10):
+        this.title = 'Mostly Manager';
+        break;
+      case (numReps >= 11 && numReps <= 50):
+        this.title = 'Manager';
+        break;
+      case (numReps >= 51 && numReps <= 100):
+        this.title = 'Manager Plus';
+        break;
+      case (numReps >= 101):
+        this.title = 'Bestest Manager';
+        break;
+    }
+  }
+  fire(name){
+    this.reports.splice(this.reports.indexOf(name),1);
+    this.bonus += 100;
+    var numReps = this.reports.length
+    switch(true){
+      case (numReps <= 0):
+        this.title = 'Not a manager';
+        break;
+      case (numReps > 0 && numReps <= 3):
+        this.title = 'Barely Manager';
+        break;
+      case (numReps >= 4 && numReps <= 10):
+        this.title = 'Mostly Manager';
+        break;
+      case (numReps >= 11 && numReps <= 50):
+        this.title = 'Manager';
+        break;
+      case (numReps >= 51 && numReps <= 100):
+        this.title = 'Manager Plus';
+        break;
+      case (numReps >= 101):
+        this.title = 'Bestest Manager';
+        break;
+    }
+  }
+}
 
 
 
@@ -90,3 +179,21 @@ It can :
       It should set decrease wear_and_tear_count by 10, and set needs_reboot to false
 
 */
+class Machine{
+  constructor(){
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false;
+  }
+  makeWidgets(num){
+    this.widgets_made_count += num;
+    this.wear_and_tear_count = this.widgets_made_count / 50
+  }
+  fixMachine(){
+    this.needs_reboot = true;
+  }
+  reboot(){
+    this.needs_reboot = false;
+    this.widgets_made_count -= 10;
+  }
+}
